@@ -89,3 +89,41 @@ bool Sudoku::isPlacementValid(size_t line, size_t column, int value) const {
         && isColValid(column, value) 
         && isSquareValid(line, column, value);
 }
+
+bool Sudoku::solve(size_t line, size_t column) {
+    //check if we are at the last square (sudoku solved)
+    if (line == _grid.size() - 1 && column == 9)
+        return true;
+
+    //pass to the next line at the end of it
+    if (column == 9) {
+        line++;
+        column = 0;
+    }
+
+    //pass to the next square if this is already done
+    if (_grid.at(line * 9 + column) > 0)
+        return solve(line, column + 1);
+
+    //for each possible value [1 - 9]
+    for (int value = 1; value <= 9; value++)
+    {
+        //check if the solution is possible
+        if (isPlacementValid(line, column, value)) 
+        {
+            _grid.at(line * 9 + column) = value;
+
+            // std::cout << *this << std::endl;
+
+            //continue in this solution 
+            if (solve(line, column + 1)) {
+                return true;
+            }
+        }
+
+        //if the solution is not possible reset it
+        _grid.at(line * 9 + column) = 0;
+    }
+
+    return false;
+}

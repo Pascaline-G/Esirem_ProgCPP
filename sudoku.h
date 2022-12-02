@@ -15,7 +15,11 @@ public:
     bool isSquareValid(size_t line, size_t column, int value) const;
     bool isPlacementValid(size_t line, size_t column, int value) const;
 
+    void solve();
+
 private:
+    bool solve(size_t line, size_t column);
+
     std::array<int,9*9> _grid;
     uint8_t _difficulty;
 
