@@ -1,5 +1,46 @@
 #include "sudoku.h"
 
+Sudoku::Sudoku(uint8_t difficulty) : _grid(),_difficulty(difficulty)
+{
+}
+
+std::ostream& operator<<(std::ostream& os, const Sudoku& sudoku)
+{
+    auto displayLine = [](std::ostream &os) -> void {
+        os << "+-------+-------+-------+";
+    };
+
+    displayLine(os);
+    os << std::endl;
+    for (size_t i = 0; i < 9; i++)
+    {
+        for (size_t j = 0; j < 9; j++)
+        {
+            if(j == 0 || j % 3 == 0) {
+                os << "| ";
+            }
+
+            if (sudoku._grid.at(i * 9 + j) == 0) {
+                os << '.';
+            } else {
+                os << (int)sudoku._grid.at(i * 9 + j);
+            }
+            os << " ";          
+
+            if(j == 9 - 1) {
+                os << "|";
+            }
+        }
+        if((i + 1) % 3 == 0) {
+            os << std::endl;
+            displayLine(os);
+        }
+        os << std::endl;        
+    }
+    return os;
+}
+
+
 bool Sudoku::isLineValid(size_t line, int value)  const {
     for (size_t i = 0; i < 9; i++)
     {
@@ -47,46 +88,4 @@ bool Sudoku::isPlacementValid(size_t line, size_t column, int value) const {
     return isLineValid(line, value) 
         && isColValid(column, value) 
         && isSquareValid(line, column, value);
-}
-
-#include "sudoku.h"
-
-Sudoku::Sudoku(uint8_t difficulty) : _grid(),_difficulty(difficulty)
-{
-}
-
-std::ostream& operator<<(std::ostream& os, const Sudoku& sudoku)
-{
-    auto displayLine = [](std::ostream &os) -> void {
-        os << "+-------+-------+-------+";
-    };
-
-    displayLine(os);
-    os << std::endl;
-    for (size_t i = 0; i < 9; i++)
-    {
-        for (size_t j = 0; j < 9; j++)
-        {
-            if(j == 0 || j % 3 == 0) {
-                os << "| ";
-            }
-
-            if (sudoku._grid.at(i * 9 + j) == 0) {
-                os << '.';
-            } else {
-                os << (int)sudoku._grid.at(i * 9 + j);
-            }
-            os << " ";          
-
-            if(j == 9 - 1) {
-                os << "|";
-            }
-        }
-        if((i + 1) % 3 == 0) {
-            os << std::endl;
-            displayLine(os);
-        }
-        os << std::endl;        
-    }
-    return os;
 }
