@@ -23,7 +23,7 @@ std::ostream& operator<<(std::ostream& os, const Sudoku& sudoku)
             if (sudoku._grid.at(i * 9 + j) == 0) {
                 os << '.';
             } else {
-                os << (int)sudoku._grid.at(i * 9 + j);
+                os << sudoku._grid.at(i * 9 + j);
             }
             os << " ";          
 

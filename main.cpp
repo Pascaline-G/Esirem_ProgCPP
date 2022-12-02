@@ -2,6 +2,8 @@
 #include "sudoku.h"
 
 int main() {
-    std::cout << "hello" << std::endl;
+    Sudoku s;
+    std::cout << s << std::endl;
+
     return 0;
 }
