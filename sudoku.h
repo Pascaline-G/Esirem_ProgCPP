@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cstdint>
+#include <iostream>
 
 class Sudoku
 {
@@ -17,6 +18,8 @@ public:
 private:
     std::array<int,9*9> _grid;
     uint8_t _difficulty;
+
+friend std::ostream& operator<<(std::ostream& os, const Sudoku& sudoku);
 };
 
 #endif //!H_SUDOKU_
