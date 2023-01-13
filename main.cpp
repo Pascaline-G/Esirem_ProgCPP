@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main() {
-  Sudoku s(5);
+  Sudoku s(5, 25);
   std::cout << s << std::endl;
 
   bool success = s.solve();
